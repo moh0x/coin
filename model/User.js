@@ -1,0 +1,69 @@
+const mongoose = require('mongoose');
+const userSchema = new mongoose.Schema({
+    userName:{
+        type:String,
+        required:true,
+        minlength:6,
+        maxlength:30
+    },
+    email:{
+        type:String,
+        required:true,
+        minlength:6,
+        maxlength:50
+    },
+    isVerified:{
+        required:true,
+        type:Boolean,
+        default:false,
+    },
+    verifyCode:{
+        type:String,
+        maxlength:6
+    },
+    resetPasswordCode:{ type:String,
+        maxlength:6},
+    code:{
+        type:String,
+        maxlength:6,
+        minlength:6,
+        required:true
+    },
+    codeAgent:{
+        type:String,
+        maxlength:6,
+        default:null
+    },
+    codeUser:{
+        type:String,
+        maxlength:6,
+        default:null
+    },
+    coin:{
+        type:Number,
+        required:true,
+        default:0
+    },
+    dollars:{
+        type:Number,
+        required:true,
+        default:0
+    },
+    affilate:{
+        type:Number,
+        required:true,
+        default:3
+    },
+    password:{
+        type:String,
+        required:true,
+        minlength:8,
+    
+    },
+    token:{
+        type:String,
+        default:null
+    }
+})
+const User = mongoose.model('User',userSchema);
+module.exports = {User}
