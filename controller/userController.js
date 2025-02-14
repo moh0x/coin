@@ -24,7 +24,7 @@ const registerFunc = async(req,res)=>{
     if (valid.isEmpty()) {
      if (!email) {
          const token = jwt.sign({ email: req.body.email,password:req.body.password }, "token");
-         const verifyCode = gen(6,"0123456789");
+         const verifyCode = gen(5,"0123456789");
          const code = gen(6,"0123456789abcdefghijklmnpkrestuvwxyz");  
          while (await User.findOne({code:code} || await Agent.findOne({code:code}))) {
           code = gen(6,"0123456789abcdefghijklmnpkrestuvwxyz");  
