@@ -56,7 +56,7 @@ const addUserCode =async(req,res)=>{
             res.status(400).json({"status":httpsStatus.FAIL,"data":null,"message":"just 1 time"});
          }
         } else {
-            res.status(400).json({"status":httpsStatus.FAIL,"data":null,"message":"check your input"});
+            res.status(400).json({"status":httpsStatus.FAIL,"data":null,"message":valid['errors'][0].msg});
         }
     } catch (error) {
         res.status(400).json({"status":httpsStatus.ERROR,"message":error});
@@ -94,7 +94,7 @@ const addAgentCode =async(req,res)=>{
             res.status(400).json({"status":httpsStatus.FAIL,"data":null,"message":"just 1 time"});
          }
         } else {
-            res.status(400).json({"status":httpsStatus.FAIL,"data":null,"message":"check your input"});
+            res.status(400).json({"status":httpsStatus.FAIL,"data":null,"message":valid['errors'][0].msg});
         }
     } catch (error) {
         res.status(400).json({"status":httpsStatus.ERROR,"message":error});

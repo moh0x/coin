@@ -18,6 +18,17 @@ const coinSchema = new mongoose.Schema({
         type:Number,
         default:0
     },
+    earn:{
+        type:Number,
+        default:0
+    },
+    agentFees:{
+        type:Number,
+        default:0
+    },
+    coinTradeLastDay:{
+    Type:Number,
+    default:0}
 })
 const Coin = mongoose.model('Coin',coinSchema);
 module.exports = {Coin}
