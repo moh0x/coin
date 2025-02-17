@@ -133,7 +133,7 @@ const buyCoin = async(req,res)=>{
 
 const getMyTradesSell = async(req,res)=>{
     const limit = 15;
-    const page = req.body.page || 1;
+    const page = req.headers.page || 1;
     const skip = (page - 1) * limit;
      try {
       var token =  req.headers.token;
