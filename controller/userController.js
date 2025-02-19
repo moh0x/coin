@@ -198,4 +198,19 @@ if (user.isVerified == false && verifyCode == user.verifyCode && user.verifyCode
    
   }
 }
-module.exports = {registerFunc,getUserInfo,loginFunc,sendResetCodeFunc,resetPasswordFunc,confirmAccountFunc}
+const logout = async(req,res)=>{
+ try {
+  const token = req.headers.token;
+  const user = await User.findOne({token:token});
+  await User.findByIdAndUpdate(user._id,{
+    $set:{
+      token:null
+    }
+  })
+  await user.save();
+  res.status(200).json({"status":httpsStatus.SUCCESS,data:null})
+ } catch (error) {
+  res.status(400).json({"status":httpsStatus.ERROR,data:null,"message":"error"})
+ }
+}
+module.exports = {registerFunc,getUserInfo,loginFunc,sendResetCodeFunc,resetPasswordFunc,confirmAccountFunc,logout}
