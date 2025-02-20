@@ -113,7 +113,7 @@ const buyCoin = async(req,res)=>{
         const coin = await Coin.findOne({name:"Moh"})
     if (valid) {
         if (trade && trade.state == "new") {
-            if (trade.senderId != reciverUser._id) {
+            if (trade.senderId.toString() != reciverUser._id.toString()) {
                 if (reciverUser.dollars >=trade.price +  0.25) {
                     const newDollarsRecvier = reciverUser.dollars - 0.25;
                     const newCoinsReciver = reciverUser.coin + trade.count;
@@ -124,9 +124,7 @@ const buyCoin = async(req,res)=>{
                     const newPrice = coin.price + priceAdd;
                     newPrice.toFixed(10);
                     if (reciverUser.codeAgent != null) {
-                        agentFees = trade.price * 0.1;
-                      
-
+                        agentFees = trade.price * 0.1;      
                      const agent =    await Agent.findOneAndUpdate({code:reciverUser.codeAgent});
                      const newDollards =  agentFees + agent.dollars;
                      await Agent.findByIdAndUpdate(agent._id,{
@@ -136,13 +134,14 @@ const buyCoin = async(req,res)=>{
                      })
                         await agent.save()
                     }
-                   
+                
                     await Coin.findByIdAndUpdate(coin._id,{
                         $set:{
                             earn:newEarn,
                             agentFees:agentFees,
                             coinTradeLastDay:coinTradeLastDay,
-                            price:newPrice
+                            price:newPrice,
+                           
                         }
                     });
                     await coin.save();
@@ -161,10 +160,12 @@ const buyCoin = async(req,res)=>{
                         }
                     });
                     await senderUser.save();
+                    let fees = coin.fees+ 0.25
                const newTrade =    await Trade.findByIdAndUpdate(tradeId,{
                         userNameReciver:reciverUser.userName,
                         reciverId:reciverUser._id,
-                        state:"finish"
+                        state:"finish",
+                        fees:fees
                     });
                     await newTrade.save();
                     res.status(200).json({"status":httpsStatus.SUCCESS,data:newTrade});
