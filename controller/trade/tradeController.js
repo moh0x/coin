@@ -74,10 +74,11 @@ const deleteMyTradeSellOpen = async(req,res)=>{
     const trade = await Trade.findById(tradeId);
     const token = req.headers.token;
     const user = await User.findOne({token:token});
-    
+    const valid = validationResult (req);
     if (valid.isEmpty()) {
-        if (trade) {
-            if (trade.senderId == user._id) {
+        if (trade) { 
+            
+            if (trade.senderId.toString() == user._id.toString()) {
                 if (trade.state == "new") {
                    await Trade.findByIdAndDelete(tradeId) ;
                    res.status(200).json({"status":httpsStatus.SUCCESS,data:null});
@@ -95,6 +96,8 @@ const deleteMyTradeSellOpen = async(req,res)=>{
          
     }
    } catch (error) {
+    console.log(error);
+    
     res.status(400).json({"status":httpsStatus.ERROR,"data":null,"message":"error"}); 
    }
    
