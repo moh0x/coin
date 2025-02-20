@@ -24,7 +24,6 @@ const tradeSchema = new mongoose.Schema({
    },
    reciverId:{
     type:mongoose.Schema.Types.ObjectId,
-    required:true,
     ref:"User",
     default:"      "
    },
