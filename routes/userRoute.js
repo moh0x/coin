@@ -13,6 +13,6 @@ router.patch('/resetPassword',body("email").isEmail().isLength({min:6,max:50}).w
 router.post('/login',body("email").isEmail().isLength({min:6,max:50}).withMessage("type valid email"),body("password").isString().isLength({min:8,max:30}).withMessage("type valid password"),userControler.loginFunc);
   
 router.patch('/sendResetCode',body("email").isEmail().isLength({min:6,max:50}).withMessage("type valid email"),userControler.sendResetCodeFunc);
-router.patch('/logout',verifyToken,verifyUser,userControler.sendResetCodeFunc);
+router.patch('/logout',verifyToken,verifyUser,userControler.logout);
   module.exports = 
     router
