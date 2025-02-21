@@ -204,12 +204,13 @@ const logout = async(req,res)=>{
   const user = await User.findOne({token:token});
   await User.findByIdAndUpdate(user._id,{
     $set:{
-      token:null
+      token:" "
     }
   })
   await user.save();
   res.status(200).json({"status":httpsStatus.SUCCESS,data:null})
  } catch (error) {
+   console.log(error);
   res.status(400).json({"status":httpsStatus.ERROR,data:null,"message":"error"})
  }
 }
