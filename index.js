@@ -12,6 +12,8 @@ const userRoute = require('./routes/userRoute');
 app.use('/api/users/',userRoute)
 const tradeRoute = require('./routes/trade/tradeRoute');
 app.use('/api/trades/',tradeRoute)
+const coinRoute = require('./routes/coin/CoinRoutes');
+app.use('/api/coin/',coinRoute)
 const dbUrl = "mongodb+srv://moh:PANDA@cluster0.vrauc.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
 mongoose.connect(dbUrl).then(()=>console.log('db connected')).catch((e)=>console.log('failed db'));
 // login user
