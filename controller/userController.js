@@ -211,10 +211,6 @@ const logout = async(req,res)=>{
   await User.findByIdAndUpdate(user._id,{
     $set:{
 
-   
-
-      token:" "
-
     }
   })
   await user.save();
@@ -224,11 +220,6 @@ const logout = async(req,res)=>{
   res.status(400).json({"status":httpsStatus.ERROR,data:null,"message":"error"})
  }
 }
-module.exports = {registerFunc,getUserInfo,loginFunc,sendResetCodeFunc,resetPasswordFunc,confirmAccountFunc,logout}
 
-   console.log(error);
-  res.status(400).json({"status":httpsStatus.ERROR,data:null,"message":"error"})
- }
-}
+ 
 module.exports = {registerFunc,getUserInfo,loginFunc,sendResetCodeFunc,resetPasswordFunc,confirmAccountFunc,logout}
-
