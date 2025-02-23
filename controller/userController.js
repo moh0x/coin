@@ -211,7 +211,7 @@ const logout = async(req,res)=>{
   await User.findByIdAndUpdate(user._id,{
     $set:{
 
-      token:null
+   
 
       token:" "
 
