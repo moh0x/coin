@@ -14,6 +14,16 @@ const tradeRoute = require('./routes/trade/tradeRoute');
 app.use('/api/trades/',tradeRoute)
 const coinRoute = require('./routes/coin/CoinRoutes');
 app.use('/api/coin/',coinRoute)
-const dbUrl = "mongodb+srv://moh:PANDA@cluster0.vrauc.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+const dbUrl = "mongodb+srv://moh:PANDA@cluster0.vrauc.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+const http = require('http')
+const server = http.createServer(app);
+const { Server } = require("socket.io");
+const io = new Server(server);
+io.on('connection', (socket) => {
+    console.log('a user connected');
+  });
+server.listen(3001, () => {
+    console.log('listening on *:3001');
+  });
 mongoose.connect(dbUrl).then(()=>console.log('db connected')).catch((e)=>console.log('failed db'));
 // login user
