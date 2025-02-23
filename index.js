@@ -19,11 +19,11 @@ const http = require('http')
 const server = http.createServer(app);
 const { Server } = require("socket.io");
 const io = new Server(server);
-io.on('connection', (socket) => {
-    console.log('a user connected');
-  });
 server.listen(3001, () => {
     console.log('listening on *:3001');
+  });
+  io.on('connection', (socket) => {
+    console.log('a user connected');
   });
 mongoose.connect(dbUrl).then(()=>console.log('db connected')).catch((e)=>console.log('failed db'));
 // login user
