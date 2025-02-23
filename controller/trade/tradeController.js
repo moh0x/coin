@@ -8,7 +8,10 @@ const {body,validationResult } = require("express-validator");
 const httpsStatus = require('../../constant/httpStatus');
 const { Trade } = require("../../model/trade/Trade");
 const { Agent } = require("../../model/agent/Agent");
+<<<<<<< HEAD
 const { PriceCoin } = require("../../model/price/PriceCoin");
+=======
+>>>>>>> 67aad90f1cb8ea06f253cab1730a9924b7a6dd74
 const createTradeSell = async(req,res)=>{
     try {
         const token = req.headers.token;
@@ -166,7 +169,11 @@ const buyCoin = async(req,res)=>{
                         }
                     });
                     await senderUser.save();
+<<<<<<< HEAD
                     let fees = trade.fees + 0.25
+=======
+                    let fees = trade.fees+ 0.25
+>>>>>>> 67aad90f1cb8ea06f253cab1730a9924b7a6dd74
                const newTrade =    await Trade.findByIdAndUpdate(tradeId,{
                         userNameReciver:reciverUser.userName,
                         reciverId:reciverUser._id,
@@ -250,4 +257,7 @@ const getMyTradesSell = async(req,res)=>{
      }
   }
   module.exports ={createTradeSell,buyCoin,getMyTradesSell,getMyTradesBuy,getMyTradesSellOpen,getAllTradesSell,deleteMyTradeSellOpen}
+<<<<<<< HEAD
   // user route.user controller.pricecoin.tradecontroller.coincontroller
+=======
+>>>>>>> 67aad90f1cb8ea06f253cab1730a9924b7a6dd74

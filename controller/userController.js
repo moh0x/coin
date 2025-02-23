@@ -210,13 +210,25 @@ const logout = async(req,res)=>{
   const user = await User.findOne({token:token});
   await User.findByIdAndUpdate(user._id,{
     $set:{
+<<<<<<< HEAD
       token:null
+=======
+      token:" "
+>>>>>>> 67aad90f1cb8ea06f253cab1730a9924b7a6dd74
     }
   })
   await user.save();
   res.status(200).json({"status":httpsStatus.SUCCESS,data:null})
  } catch (error) {
+<<<<<<< HEAD
   res.status(400).json({"status":httpsStatus.ERROR,data:null,"message":"error"})
  }
 }
 module.exports = {registerFunc,getUserInfo,loginFunc,sendResetCodeFunc,resetPasswordFunc,confirmAccountFunc,logout}
+=======
+   console.log(error);
+  res.status(400).json({"status":httpsStatus.ERROR,data:null,"message":"error"})
+ }
+}
+module.exports = {registerFunc,getUserInfo,loginFunc,sendResetCodeFunc,resetPasswordFunc,confirmAccountFunc,logout}
+>>>>>>> 67aad90f1cb8ea06f253cab1730a9924b7a6dd74
