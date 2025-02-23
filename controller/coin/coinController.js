@@ -53,7 +53,7 @@ const addUserCode =async(req,res)=>{
                                
                            })
                         }
-<<<<<<< HEAD
+
                         let newPrice =  coin.price + 0.000001;
                         await Coin.findByIdAndUpdate(coin._id,{
                             $set:{
@@ -66,8 +66,7 @@ const addUserCode =async(req,res)=>{
                             price:coin.price,
                           });
                           await newPriceCoin.save();
-=======
->>>>>>> 67aad90f1cb8ea06f253cab1730a9924b7a6dd74
+
                         res.status(200).json({"status":httpsStatus.SUCCESS,"data":null});
                        } else {
                            res.status(400).json({"status":httpsStatus.FAIL,"data":null,"message":"max is 3"});
@@ -115,7 +114,7 @@ const addAgentCode =async(req,res)=>{
                            
                        })
                        await user.save();
-<<<<<<< HEAD
+
                        let newPrice =  coin.price + 0.00001;
                        await Coin.findByIdAndUpdate(coin._id,{
                            $set:{
@@ -128,8 +127,7 @@ const addAgentCode =async(req,res)=>{
                            price:coin.price,
                          });
                          await newPriceCoin.save();
-=======
->>>>>>> 67aad90f1cb8ea06f253cab1730a9924b7a6dd74
+
                        await agent.save();
                        res.status(200).json({"status":httpsStatus.SUCCESS,"data":null});
                     res.status(200).json({"status":httpsStatus.SUCCESS,"data":null});
