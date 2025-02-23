@@ -53,20 +53,18 @@ const addUserCode =async(req,res)=>{
                                
                            })
                         }
-
                         let newPrice =  coin.price + 0.000001;
+                        let percentage =newPrice/coin.price;
+                        let per = newPrice > coin.price ? percentage : -percentage
                         await Coin.findByIdAndUpdate(coin._id,{
                             $set:{
-                              price:newPrice
+                              price:newPrice,
+                              percentage: per,
+                              up: newPrice > coin.price ? true : false
                             }
                           })
                           await coin.save();
-                          let newPriceCoin = await new PriceCoin({
-                            name:coin.name,
-                            price:coin.price,
-                          });
-                          await newPriceCoin.save();
-
+                       
                         res.status(200).json({"status":httpsStatus.SUCCESS,"data":null});
                        } else {
                            res.status(400).json({"status":httpsStatus.FAIL,"data":null,"message":"max is 3"});
@@ -114,20 +112,17 @@ const addAgentCode =async(req,res)=>{
                            
                        })
                        await user.save();
-
-                       let newPrice =  coin.price + 0.00001;
+                       let newPrice =  coin.price + 0.000001;
+                       let percentage =newPrice/coin.price;
+                       let per = newPrice > coin.price ? percentage : -percentage
                        await Coin.findByIdAndUpdate(coin._id,{
                            $set:{
-                             price:newPrice
+                             price:newPrice,
+                             percentage: per,
+                             up: newPrice > coin.price ? true : false
                            }
                          })
                          await coin.save();
-                         let newPriceCoin = await new PriceCoin({
-                           name:coin.name,
-                           price:coin.price,
-                         });
-                         await newPriceCoin.save();
-
                        await agent.save();
                        res.status(200).json({"status":httpsStatus.SUCCESS,"data":null});
                     res.status(200).json({"status":httpsStatus.SUCCESS,"data":null});
@@ -146,4 +141,12 @@ const addAgentCode =async(req,res)=>{
         res.status(400).json({"status":httpsStatus.ERROR,"message":"error"});
     }
 }
-module.exports ={addUserCode,addAgentCode}
+const getCoin = async (req,res) => {
+    try {
+       const coin = await Coin.findOne({name:"Moh"}) ;
+       res.status(200).json({"status":httpsStatus.SUCCESS,"data":coin})
+    } catch (error) {
+        res.status(400).json({"status":httpsStatus.ERROR,"data":null,"message":"error"})
+    }
+}
+module.exports ={addUserCode,addAgentCode,getCoin}
