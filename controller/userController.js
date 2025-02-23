@@ -6,6 +6,7 @@ const {body,validationResult } = require("express-validator");
 const httpsStatus = require('../constant/httpStatus');
 const { Coin } = require("../model/Coin");
 const { Agent } = require("../model/agent/Agent");
+const { PriceCoin } = require("../model/price/PriceCoin");
 
 const getUserInfo = async(req,res)=>{
   try {
@@ -25,11 +26,9 @@ const registerFunc = async(req,res)=>{
      if (!email) {
          const token = jwt.sign({ email: req.body.email,password:req.body.password }, "token");
          const verifyCode = gen(5,"0123456789");
-<<<<<<< HEAD
-         const code = gen(5,"0123456789abcdefghijklmnpkrestuvwxyz");  
-=======
+
          const code = gen(6,"0123456789abcdefghijklmnpkrestuvwxyz");  
->>>>>>> 26418ecdbf290779d3c93eb9b2d35c37d7491ffc
+  
          while (await User.findOne({code:code} || await Agent.findOne({code:code}))) {
           code = gen(6,"0123456789abcdefghijklmnpkrestuvwxyz");  
          }
@@ -182,6 +181,11 @@ if (user.isVerified == false && verifyCode == user.verifyCode && user.verifyCode
     }
   })
   await coin.save();
+  let newPriceCoin = await new PriceCoin({
+    name:coin.name,
+    price:coin.price,
+  });
+  await newPriceCoin.save();
   await user.save();
   const userWithNewInfos = await User.findOne({token:token},{__v:false,password:false});
   res.status(200).json({"status":httpsStatus.SUCCESS,"data":userWithNewInfos});;
@@ -200,4 +204,19 @@ if (user.isVerified == false && verifyCode == user.verifyCode && user.verifyCode
    
   }
 }
-module.exports = {registerFunc,getUserInfo,loginFunc,sendResetCodeFunc,resetPasswordFunc,confirmAccountFunc}
+const logout = async(req,res)=>{
+ try {
+  const token = req.headers.token;
+  const user = await User.findOne({token:token});
+  await User.findByIdAndUpdate(user._id,{
+    $set:{
+      token:null
+    }
+  })
+  await user.save();
+  res.status(200).json({"status":httpsStatus.SUCCESS,data:null})
+ } catch (error) {
+  res.status(400).json({"status":httpsStatus.ERROR,data:null,"message":"error"})
+ }
+}
+module.exports = {registerFunc,getUserInfo,loginFunc,sendResetCodeFunc,resetPasswordFunc,confirmAccountFunc,logout}
