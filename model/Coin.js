@@ -16,26 +16,11 @@ const coinSchema = new mongoose.Schema({
     },
     used:{
         type:Number,
-<<<<<<< HEAD
    
     },
     earn:{
         type:Number,
       
-    },
-    agentFees:{
-        type:Number,
-    
-    },
-    coinTradeLastDay:{
-    Type:Number,
-  }
-=======
-
-    },
-    earn:{
-        type:Number,
-
     },
     agentFees:{
         type:Number,
@@ -45,7 +30,6 @@ const coinSchema = new mongoose.Schema({
     Type:Number,
 
     }
->>>>>>> 67aad90f1cb8ea06f253cab1730a9924b7a6dd74
 })
 const Coin = mongoose.model('Coin',coinSchema);
 module.exports = {Coin}
