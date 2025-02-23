@@ -170,7 +170,7 @@ const buyCoin = async(req,res)=>{
                     });
                     await senderUser.save();
 
-                    let fees = trade.fees + 0.25
+                
 
                     let fees = trade.fees+ 0.25
                const newTrade =    await Trade.findByIdAndUpdate(tradeId,{
