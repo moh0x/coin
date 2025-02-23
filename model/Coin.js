@@ -28,8 +28,15 @@ const coinSchema = new mongoose.Schema({
     },
     coinTradeLastDay:{
     Type:Number,
-
+    },
+    percentage:{
+        Type:Number,
+    },
+    up:{
+        Type:Boolean,
     }
+
 })
 const Coin = mongoose.model('Coin',coinSchema);
 module.exports = {Coin}
+
