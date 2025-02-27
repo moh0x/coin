@@ -13,6 +13,8 @@
     "@codedipper/random-code": "^3.1.0",
     "@trycourier/courier": "^6.3.1",
     "bcryptjs": "^2.4.3",
+    "binance-api-node": "^0.12.9",
+    "ccxt": "^4.4.62",
     "cors": "^2.8.5",
     "emailjs": "^4.0.3",
     "express": "^4.21.2",

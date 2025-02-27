@@ -8,10 +8,8 @@ const {body,validationResult } = require("express-validator");
 const httpsStatus = require('../../constant/httpStatus');
 const { Trade } = require("../../model/trade/Trade");
 const { Agent } = require("../../model/agent/Agent");
-<<<<<<< HEAD
 const { PriceCoin } = require("../../model/price/PriceCoin");
-=======
->>>>>>> 67aad90f1cb8ea06f253cab1730a9924b7a6dd74
+
 const createTradeSell = async(req,res)=>{
     try {
         const token = req.headers.token;
@@ -124,7 +122,7 @@ const buyCoin = async(req,res)=>{
                     const newEarn = coin.earn + 0.25;
                     let agentFees = 0;
                     const coinTradeLastDay = Number(coin.coinTradeLastDay) + Number(trade.count);
-                    const priceAdd = ((trade.price - coin.price)*trade.count)/3000000;
+                    const priceAdd = ((trade.priceOneCoin - coin.price)*trade.count)/3000000;
                     const newPrice = coin.price + priceAdd;
                     newPrice.toFixed(10);
                     if (reciverUser.codeAgent != null) {
@@ -138,22 +136,20 @@ const buyCoin = async(req,res)=>{
                      })
                         await agent.save()
                     }
-                
+                    let percentage =newPrice/coin.price;
+                    let per = newPrice > coin.price ? percentage : -percentage
                     await Coin.findByIdAndUpdate(coin._id,{
                         $set:{
                             earn:newEarn,
                             agentFees:agentFees,
                             coinTradeLastDay:coinTradeLastDay,
-                            price:newPrice,
-                           
+                            price:newPrice, 
+                            percentage: per,
+                            up: newPrice > coin.price ? true : false 
                         }
                     });
                     await coin.save();
-                    let newPriceCoin = await new PriceCoin({
-                        name:coin.name,
-                        price:coin.price,
-                      });
-                      await newPriceCoin.save();
+                  
                     await User.findByIdAndUpdate(reciverUser._id,{
                         $set:{
                             dollars:newDollarsRecvier,
@@ -169,11 +165,7 @@ const buyCoin = async(req,res)=>{
                         }
                     });
                     await senderUser.save();
-<<<<<<< HEAD
                     let fees = trade.fees + 0.25
-=======
-                    let fees = trade.fees+ 0.25
->>>>>>> 67aad90f1cb8ea06f253cab1730a9924b7a6dd74
                const newTrade =    await Trade.findByIdAndUpdate(tradeId,{
                         userNameReciver:reciverUser.userName,
                         reciverId:reciverUser._id,
@@ -257,7 +249,3 @@ const getMyTradesSell = async(req,res)=>{
      }
   }
   module.exports ={createTradeSell,buyCoin,getMyTradesSell,getMyTradesBuy,getMyTradesSellOpen,getAllTradesSell,deleteMyTradeSellOpen}
-<<<<<<< HEAD
-  // user route.user controller.pricecoin.tradecontroller.coincontroller
-=======
->>>>>>> 67aad90f1cb8ea06f253cab1730a9924b7a6dd74
