@@ -37,8 +37,7 @@ const withdrawSchema = new mongoose.Schema({
     default:"      "
    },
    senderWallet:{
-    Type:String,
-    default:"TYpuE56QUGBbdxzVd4h5Kh6UoiBisMjzgs"
+    Type:String
    }
 })
 const Withdraw = mongoose.model('Withdraw',withdrawSchema);
