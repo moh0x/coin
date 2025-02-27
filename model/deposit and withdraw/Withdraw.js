@@ -33,8 +33,7 @@ const withdrawSchema = new mongoose.Schema({
     maxlength:88
    },
    reciverWallet:{
-    Type:String, 
-    default:"      "
+    Type:String
    },
    senderWallet:{
     Type:String
