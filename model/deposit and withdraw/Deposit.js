@@ -33,5 +33,5 @@ const depositSchema = new mongoose.Schema({
     maxlength:88
    }
 })
-const Trade = mongoose.model('Trade',tradeSchema);
-module.exports = {Trade}
+const Deposit = mongoose.model('Deposit',depositSchema);
+module.exports = {Deposit}
