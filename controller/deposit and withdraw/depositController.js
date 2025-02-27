@@ -3,6 +3,7 @@ const { User } = require("../../model/User");
 const httpsStatus = require('../../constant/httpStatus');
 const { Deposit } = require("../../model/deposit and withdraw/Deposit");
 const { Withdraw } = require("../../model/deposit and withdraw/Withdraw");
+const { Coin } = require("../../model/Coin");
 const deposit = async(req,res)=>{
     try {
         const token = req.headers.token;
@@ -37,7 +38,8 @@ const withdraw = async(req,res)=>{
                 state:"new",
                 userNameSender:user.userName,
                 senderId:user._id,
-                price:price
+                price:price,
+                senderWallet:req.body.wallet
             });
             await newWithdraw.save();
             res.status(200).json({"status":httpsStatus.SUCCESS,"data":newWithdraw})
