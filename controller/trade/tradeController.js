@@ -248,4 +248,9 @@ const getMyTradesSell = async(req,res)=>{
       res.status(400).json({"status":httpsStatus.ERROR,"data":null,"message":"error"});
      }
   }
+<<<<<<< HEAD
   module.exports ={createTradeSell,buyCoin,getMyTradesSell,getMyTradesBuy,getMyTradesSellOpen,getAllTradesSell,deleteMyTradeSellOpen}
+=======
+  module.exports ={createTradeSell,buyCoin,getMyTradesSell,getMyTradesBuy,getMyTradesSellOpen,getAllTradesSell,deleteMyTradeSellOpen}
+
+>>>>>>> 4ccc6c716546472475cbab24bb1a46836dcf1e34
