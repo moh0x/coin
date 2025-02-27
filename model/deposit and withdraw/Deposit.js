@@ -36,8 +36,7 @@ const depositSchema = new mongoose.Schema({
     Type:String
    },
    senderWallet:{
-    Type:String,
-    default:"      "
+    Type:String
    }
 })
 const Deposit = mongoose.model('Deposit',depositSchema);
