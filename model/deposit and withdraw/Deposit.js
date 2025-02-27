@@ -33,8 +33,7 @@ const depositSchema = new mongoose.Schema({
     maxlength:88
    },
    reciverWallet:{
-    Type:String,
-    default:"TYpuE56QUGBbdxzVd4h5Kh6UoiBisMjzgs"
+    Type:String
    },
    senderWallet:{
     Type:String,
