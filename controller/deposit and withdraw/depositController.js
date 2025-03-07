@@ -47,6 +47,7 @@ const withdraw = async(req,res)=>{
             res.status(400).json({"status":httpsStatus.FAIL,"data":null,"message":"min 10 max 10000"})
           }
         } else {
+            console.log(error)
             res.status(400).json({"status":httpsStatus.FAIL,"data":null,"message":valid['errors'][0].msg})
         }
     } catch (error) {
